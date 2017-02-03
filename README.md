@@ -11,7 +11,7 @@ Conduit is a fully featured social blogging site including:
 * Ability to "favorite" articles
 * Ability to follow other users & have their articles show up in your feed
 
-This tutorial is still in development and we hope to have to complete rather soon! 
+[You can view the live demo here.](https://angular2.realworld.io/) This tutorial is still in development and we hope to have to complete rather soon! 
 
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
