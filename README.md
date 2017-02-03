@@ -4,12 +4,12 @@ Conduit is a Medium.com clone. It was built to teach students on [Thinkster](htt
 
 Conduit is a fully featured social blogging site including:
 
-*Authentication with JWT
-*Profiles with images
-*Write/edit/read articles
-*Comments on articles
-*Ability to "favorite" articles
-*Ability to follow other users & have their articles show up in your feed
+* Authentication with JWT
+* Profiles with images
+* Write/edit/read articles
+* Comments on articles
+* Ability to "favorite" articles
+* Ability to follow other users & have their articles show up in your feed
 
 This tutorial is still in development and we hope to have to complete rather soon! 
 
