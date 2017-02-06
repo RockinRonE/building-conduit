@@ -3,7 +3,9 @@
         
         <a class="navbar-brand" routerLink="/">conduit</a>
 
-        <ul class="nav navbar-nav pull-xs-right">
+        <!--Show this for logged out users-->
+        <ul *showAuthed = "false"
+            class="nav navbar-nav pull-xs-right">
 
             <li class="nav-item">
                 <a class="nav-link" routerLink="/"> Home </a>
@@ -18,5 +20,37 @@
             </li>
 
         </ul>
+
+        <!--Show this for logged in users-->
+        <ul *showAuthed="true" class="nav navbar-nav pull-xs-right">
+
+             <li class="nav-item">
+                 <a class="nav-link"
+                    routerLink="/"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }">
+                    Home
+                 </a>
+             </li>
+
+            <li class="nav-item">
+                <a class="nav-link">
+                    <i class="ion-compose"></i>&nbsp;New Article
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link">
+                    <i class="ion-gear-a"></i>&nbsp;Settings
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link">
+                    My Profile
+                </a>
+            </li>
+        </ul>
+
     </div>
 </nav>`
