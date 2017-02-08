@@ -3,7 +3,8 @@
         
         <a class="navbar-brand" routerLink="/">conduit</a>
 
-        <ul class="nav navbar-nav pull-xs-right">
+        <!-- Show this for logged out users -->
+        <ul *showAuthed="false" class="nav navbar-nav pull-xs-right">
 
             <li class="nav-item">
                 <a class="nav-link" routerLink="/"> Home </a>
@@ -18,5 +19,15 @@
             </li>
 
         </ul>
+
+        <!-- Show this for logged in users  -->
+        <ul *showAuthed="true" class="nav navbar-nav pull-xs-right">
+            <a class="nav-link"
+                routerLink="/"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
+                Home
+            </a>
+        </ul>
     </div>
-</nav>`
+</nav>

@@ -7,7 +7,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { ApiService } from './api.service';
+import { JwtService } from './jwt.service'; 
 import { User } from '../models';
+
 
 
 @Injectable()
@@ -15,19 +17,50 @@ export class UserService {
   private currentUserSubject = new BehaviorSubject<User>(new User());
   public currentUser = this.currentUserSubject.asObservable().distinctUntilChanged();
 
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
   constructor (
     private apiService: ApiService,
-    private http: Http
+    private http: Http,
+    private jwtService: JwtService
   ) {}
 
+  // Verify JWT in localStorage with server and load user's info
+  // This runs once on app startup
+
+  populate() {
+    // If JWT detected, attempt to retrieve and store user's info
+
+    if(this.jwtService.getToken()) {
+      // utilize our newly created get(). (params are optional)
+      this.apiService.get('/user')
+        .subscribe(
+          data => this.setAuth(data.user),
+          err => this.purgeAuth()
+          );
+    } else {
+      // Remove any potential remnants of prev auth states
+      this.purgeAuth(); 
+    }
+  }
+
   setAuth(user: User) {
+    // Save JWT sent from server in localStorage
+    this.jwtService.saveToken(user.token); 
     // Set current user data into observable
     this.currentUserSubject.next(user);
     // Set isAuthenticated to true
     this.isAuthenticatedSubject.next(true);
+  }
+
+  purgeAuth() {
+    // Remove JWT from localStorage
+    this.jwtService.destoryToken(); 
+    // Set current user to empty object
+    this.currentUserSubject.next(new User());
+    // Set Auth status to false
+    this.isAuthenticatedSubject.next(false);
   }
 
   attemptAuth(type, credentials): Observable<User> {

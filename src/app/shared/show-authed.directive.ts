@@ -18,9 +18,7 @@ export class ShowAuthedDirective implements OnInit {
 
 	condition: boolean; 
 
-@Input() set showAuthed(condition: boolean) {
-	this.condition = condition; 
-	}
+	
 
 	ngOnInit() { 
 		this.userService.isAuthenticated.subscribe(
@@ -32,6 +30,9 @@ export class ShowAuthedDirective implements OnInit {
 				}
 			}
 		)
+	}
+	@Input() set showAuthed(condition: boolean) {
+		this.condition = condition; 
 	}
 
 }
