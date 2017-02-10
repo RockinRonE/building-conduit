@@ -9,6 +9,7 @@ const settingsRouting: ModuleWithProviders = RouterModule.forChild([
 		path: 'settings',
 		component: SettingsComponent,
 		canActivate: [AuthGuard]
+
 	}
 ]);
 
@@ -21,5 +22,4 @@ const settingsRouting: ModuleWithProviders = RouterModule.forChild([
 		SettingsComponent
 	]
 })
-
 export class SettingsModule { }

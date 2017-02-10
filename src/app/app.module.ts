@@ -6,15 +6,18 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { HomeModule } from './home/home.module';
 import { SettingsModule } from './settings/settings.module'; 
+import { ProfileModule } from './profile/profile.module'; 
 import { 
-  SharedModule,
   ApiService,
+  AuthGuard,
   UserService,
   JwtService,
+  ProfilesService,
   FooterComponent,
   HeaderComponent,
-  AuthGuard
+  SharedModule
 } from './shared'; 
+// import { AuthGuard } from './shared/services/auth-guard.service';
 
 const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
 
@@ -30,13 +33,15 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     HomeModule,
     rootRouting,
     AuthModule,
+    ProfileModule,
     SettingsModule
   ],
   providers: [
     ApiService,
+    AuthGuard,
     UserService,
     JwtService,
-    AuthGuard
+    ProfilesService
   ],
   bootstrap: [AppComponent]
 })

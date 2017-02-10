@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { JwtService } from '../services'; 
+import { JwtService } from './jwt.service'; 
 
 @Injectable()
 export class ApiService {
@@ -44,6 +44,11 @@ export class ApiService {
             .map((res:Response) => res.json());
     }
 
+    put(path: string, body: Object = {}): Observable<any> {
+        return this.http.put(`${environment.api_url}${path}`, JSON.stringify(body), { headers: this.setHeaders()})
+            .catch(this.formatErrors)
+            .map((res:Response) => res.json()); 
+    }
 
 
 
