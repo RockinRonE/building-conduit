@@ -48,7 +48,7 @@ export class FollowButtonComponent {
 								this.isSubmitting = false;
 								this.onToggle.emit(false);
 							},
-							err => this.isSubmitting = false; 
+							err => this.isSubmitting = false
 						);
 					}
 				}

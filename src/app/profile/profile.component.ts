@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
 		// retrive profile data from URL params
 		this.route.data.subscribe(
 			(data: {profile: Profile}) => {
+				console.log(data.profile); 
 				this.profile = data.profile
 			}
 		);

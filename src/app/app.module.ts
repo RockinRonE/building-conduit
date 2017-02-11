@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
+import { EditorModule } from './editor/editor.module';
 import { HomeModule } from './home/home.module';
 import { SettingsModule } from './settings/settings.module'; 
 import { ProfileModule } from './profile/profile.module'; 
@@ -15,7 +16,8 @@ import {
   ProfilesService,
   FooterComponent,
   HeaderComponent,
-  SharedModule
+  SharedModule,
+  ArticlesService
 } from './shared'; 
 // import { AuthGuard } from './shared/services/auth-guard.service';
 
@@ -32,12 +34,14 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     SharedModule,
     HomeModule,
     rootRouting,
+    EditorModule,
     AuthModule,
     ProfileModule,
     SettingsModule
   ],
   providers: [
     ApiService,
+    ArticlesService,
     AuthGuard,
     UserService,
     JwtService,
