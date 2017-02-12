@@ -30,9 +30,17 @@ export class ArticleComponent implements OnInit {
 	ngOnInit() {
 		// Retrive prefetched article
 		this.route.data.subscribe(
+			(data: { article: Article }) => {
+				this.article = data.article;
+			}
+		);
+
+		// load current users data
+		this.route.data.subscribe(
 			(userData:User) => {
 				this.currentUser = userData; 
 				this.canModify = (this.currentUser.username === this.article.author.username)
+				console.log(this.article.author.username);
 			}
 		);
 	}
