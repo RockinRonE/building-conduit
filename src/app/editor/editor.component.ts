@@ -57,7 +57,7 @@ export class EditorComponent implements OnInit {
 	}
 
 	updateArticle(values: Object) {
-		(<Any>Object).assign(this.article, values); 
+		(<any>Object).assign(this.article, values); 
 	}
 
 	submitForm() {

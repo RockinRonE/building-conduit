@@ -29,8 +29,18 @@ export class ArticlesService {
 			return this.apiService.post('/articles', { article: article })
 				.map(data => data.article); 
 		}
+	}
 
+	destroy(slug) {
+		return this.apiService.delete('/articles/' + slug );
+	}
 
+	favorite(slug) {
+		return this.apiService.post('/articles/' + slug + '/favorite');
+	}
+
+	unfavorite(slug) {
+		return this.apiService.delete('/articles/' + slug + '/favorite');
 	}
 
 
