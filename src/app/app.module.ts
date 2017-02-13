@@ -18,6 +18,7 @@ import {
   FooterComponent,
   HeaderComponent,
   SharedModule,
+  CommentsService,
   ArticlesService
 } from './shared'; 
 // import { AuthGuard } from './shared/services/auth-guard.service';
@@ -47,6 +48,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: tru
     AuthGuard,
     UserService,
     JwtService,
+    CommentsService,
     ProfilesService
   ],
   bootstrap: [AppComponent]
