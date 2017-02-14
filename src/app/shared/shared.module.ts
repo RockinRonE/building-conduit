@@ -4,9 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
+
 import { ListErrorsComponent } from './list-errors.component'; 
 import { ShowAuthedDirective } from './show-authed.directive'; 
-import { ArticleMetaComponent } from './article-helpers';
+import { ArticleMetaComponent, ArticleListComponent, ArticlePreviewComponent } from './article-helpers';
 import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
 
 @NgModule({
@@ -19,13 +20,15 @@ import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
   ],
   declarations: [
     ListErrorsComponent,
+    ArticleListComponent,
+    ArticlePreviewComponent,
     ShowAuthedDirective,
     FollowButtonComponent,
     FavoriteButtonComponent,
     ArticleMetaComponent
   ],
   exports: [
-    CommonModule,
+    CommonModule, 
     FormsModule,
     ReactiveFormsModule,
     ArticleMetaComponent,
@@ -34,7 +37,9 @@ import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
     ListErrorsComponent,
     RouterModule,
     ShowAuthedDirective,
-    FollowButtonComponent
+    FollowButtonComponent,
+    ArticlePreviewComponent,
+    ArticleListComponent
   ]
 })
 export class SharedModule {}

@@ -5,45 +5,59 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { ApiService } from './api.service';
-import { Article } from '../models';
+import { Article, ArticleListConfig } from '../models';
 
 @Injectable()
 export class ArticlesService {
-	constructor (
-		private apiService: ApiService
-	) {}
+  constructor (
+    private apiService: ApiService
+  ) {}
 
-	get(slug): Observable<Article> {
-		return this.apiService.get('/articles/' + slug)
-			.map(data => data.article); 
-	}
+  query(config: ArticleListConfig): Observable<{articles: Article[], articlesCount: number}> {
+    // Convert any filters over to Angular's URLSearchParams
+    let params: URLSearchParams = new URLSearchParams();
 
-	save(article): Observable<Article> {
-		// If we're updating existing article
-		if (article.slug) {
-			return this.apiService.put('/articles/' + article.slug, {article: article})
-				.map(data => data.article);
+    Object.keys(config.filters)
+    .forEach((key) => {
+      params.set(key, config.filters[key]);
+    });
 
-			// Otherwise create a new one
-		} else {
-			return this.apiService.post('/articles', { article: article })
-				.map(data => data.article); 
-		}
-	}
+    return this.apiService
+    .get(
+      '/articles' + ((config.type === 'feed') ? '/feed' : ''),
+      params
+    ).map(data => data);
+  }
 
-	destroy(slug) {
-		return this.apiService.delete('/articles/' + slug );
-	}
+  get(slug): Observable<Article> {
+    return this.apiService.get('/articles/' + slug)
+           .map(data => data.article);
+  }
 
-	favorite(slug) {
-		return this.apiService.post('/articles/' + slug + '/favorite');
-	}
+  destroy(slug) {
+    return this.apiService.delete('/articles/' + slug);
+  }
 
-	unfavorite(slug) {
-		return this.apiService.delete('/articles/' + slug + '/favorite');
-	}
+  save(article): Observable<Article> {
+    // If we're updating an existing article
+    if (article.slug) {
+      return this.apiService.put('/articles/' + article.slug, {article: article})
+             .map(data => data.article);
 
+    // Otherwise, create a new article
+    } else {
+      return this.apiService.post('/articles/', {article: article})
+             .map(data => data.article);
+    }
+  }
 
+  favorite(slug): Observable<Article> {
+    return this.apiService.post('/articles/' + slug + '/favorite');
+  }
+
+  unfavorite(slug): Observable<Article> {
+    return this.apiService.delete('/articles/' + slug + '/favorite');
+  }
 
 
 }
